@@ -1,0 +1,24 @@
+{
+  "name": "harness-dev",
+  "version": "0.1.0",
+  "description": "Fully managed project development via Claude Code / Codex skills",
+  "type": "module",
+  "bin": {
+    "harness-dev": "./bin/install.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "platforms/",
+    "skills/",
+    "templates/"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "keywords": ["claude-code", "codex", "skills", "harness", "ai-development"],
+  "license": "MIT"
+}
