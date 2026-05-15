@@ -17,7 +17,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test tests/*.test.mjs"
   },
   "keywords": ["claude-code", "codex", "skills", "harness", "ai-development"],
   "license": "MIT"
