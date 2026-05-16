@@ -97,6 +97,43 @@ After the user confirms your summary, collect these structured items:
 - Shallow acceptance — accepting vague answers without pushing for specifics
 - Premature constraints — asking about tech stack before understanding the idea
 
+### Choice Presentation Guidelines
+
+When presenting options for the user to choose from, the depth of explanation depends on the category:
+
+#### Category 1: Product Form / Goal / Style Choices
+
+These are choices that shape what the final product looks and feels like. The user often lacks experience to judge the downstream impact.
+
+**Required behavior:**
+- Use web-search to find real-world examples and current information
+- Present each option with these 5 dimensions:
+
+  1. **What it is** — one sentence explanation
+  2. **Product impact** — what the final product will look/feel/behave like if you choose this
+  3. **Reference cases** — 2-3 real websites, apps, or products as examples (with URLs when possible)
+  4. **Best for** — what type of project or user this suits
+  5. **Trade-off** — what you give up by choosing this
+
+**Example triggers:** interaction style, visual direction, product category, target audience positioning, content strategy, monetization model
+
+#### Category 2: Technical / Feature Detail Choices
+
+These are implementation decisions (frameworks, libraries, architecture patterns, feature scoping).
+
+**Required behavior:**
+- Use your own knowledge — do NOT web-search unless you are genuinely uncertain about current state (e.g., a framework's latest version or deprecation status)
+- Present concise pros/cons for each option
+- Include your recommendation and reasoning
+
+**Example triggers:** tech stack selection, testing framework, deployment strategy, API design, database choice
+
+#### General Rules
+
+- Always state which option you recommend and why
+- If the user seems unsure after seeing options, offer to explain further or search for more info
+- Never present bare options without explanation — every choice must have enough context for an informed decision
+
 ---
 
 ## Phase 2: Requirements Refinement (Per-feature Deep Dive)
