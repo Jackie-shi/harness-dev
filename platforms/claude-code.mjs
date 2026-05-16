@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 export function getInstallPath(scope) {
   if (scope === 'global') {
-    return join(homedir(), '.claude', 'skills', 'harness');
+    return join(homedir(), '.claude', 'skills');
   }
-  return join(process.cwd(), '.claude', 'skills', 'harness');
+  return join(process.cwd(), '.claude', 'skills');
 }
 
 export function getUsageHint() {
