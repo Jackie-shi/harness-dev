@@ -137,6 +137,7 @@ Actions:
   - Any notable decisions or deviations
 - Update `PROGRESS.md` with final status.
 - Commit: `chore: harness complete — all stages done`
+- End with: "All goals for this version are complete. When you're ready to plan the next version, run `/harness-next`."
 
 ### 2. Blocked
 
