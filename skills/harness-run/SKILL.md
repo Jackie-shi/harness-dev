@@ -39,6 +39,19 @@ WIP=1 constraint: Only one feature may be `in_progress` at any time. If you find
 
 TDD is non-negotiable. Every feature must follow Red-Green-Refactor:
 
+**Pre-step: Design Artifact Awareness (UI features only)**
+
+Before entering Red phase, check if this feature involves UI (any visible interface, page, or component):
+1. Check if `design/` directory exists in the project root.
+2. If yes, you MUST read the following before writing any code:
+   - `design/styleguide.html` — the source of truth for colors, typography, spacing, components. Every visual decision must derive from these tokens.
+   - `design/preview-*.html` files — static mockups showing the visual target. The implemented UI must visually match these within reasonable production fidelity.
+   - `design/motion.html` — animation language and timing
+   - `design/wireframes.html` — page structure reference
+   - `design/flow.md` — navigation transitions
+3. Use these as binding visual specification. Do NOT make up colors, fonts, spacing values, or animation timings — pull them from the design artifacts.
+4. If `design/` does not exist and the feature is clearly UI-related, ask the user: "This feature involves UI but no design artifacts exist. Want to run `/harness-design` first?" Wait for response before proceeding.
+
 **Red Phase:**
 1. Read the feature's `behavior` and `acceptance` criteria from `docs/features.yaml`.
 2. Write test(s) that encode the acceptance criteria. Tests must be specific and verifiable.
@@ -52,6 +65,12 @@ TDD is non-negotiable. Every feature must follow Red-Green-Refactor:
 6. Review the implementation for clarity, duplication, and adherence to project conventions (from AGENTS.md).
 7. Refactor if needed. Run tests again to confirm still green.
 
+**Design Critique (UI features only):**
+After Green/Refactor for a UI feature:
+- Invoke `impeccable:critique` skill (or apply its principles directly) to review the implementation against `design/preview-*.html` and `design/styleguide.html`.
+- If the critique identifies meaningful gaps (off-token colors, off-spec spacing, missing motion, etc.), apply fixes before commit.
+- Run verification tests again after the polish pass to confirm still green.
+
 **Commit:**
 8. Stage the logical unit (test + implementation together).
 9. Commit with message format: `feat: <feature-id> — <what was done>`
@@ -62,6 +81,7 @@ Rules:
 - Never modify a test to make it pass — fix the implementation instead.
 - One atomic commit per logical unit, not per file.
 - Each commit must leave the project in a green state (all tests passing).
+- For UI features, the visual must derive from `design/` artifacts. Ad-hoc values are forbidden.
 
 ### Step 3: verify
 

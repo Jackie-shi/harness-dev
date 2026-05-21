@@ -21,7 +21,7 @@ No CLI. No config files to hand-write. No project management overhead. Just a co
 ## How It Works
 
 ```
-/harness-init  →  /harness-run  →  (complete)  →  /harness-next  →  /harness-run  →  ...
+/harness-init  →  /harness-design  →  /harness-run  →  (complete)  →  /harness-next  →  ...
 ```
 
 ### 1. Init — One deep conversation
@@ -30,20 +30,35 @@ You talk about what you want to build. The agent digs in — challenges vague id
 
 Output: a set of skeleton files (`features.yaml`, `roadmap.yaml`, `PROGRESS.md`, etc.) that encode your entire project plan.
 
-### 2. Run — Fully autonomous development
+### 2. Design — Layered visual confirmation (UI projects)
+
+For Web / Desktop / Mobile projects, init prompts you to enter `/harness-design`. Visual design happens in 5 lightweight tile-based layers — each independently confirmed before moving to the next:
+
+- **L1 Wireframes** — page structure as grayscale tiles
+- **L2 Navigation flow** — page-to-page transitions as a mermaid diagram
+- **L3 Style tiles** — color, typography, components
+- **L4 Key page mockups** — 1-2 critical pages, real visual, no interactivity
+- **L5 Motion tiles** — animation demos as small interactive cards
+
+Each layer is fast to generate and easy to iterate on. If you discover an issue late (say in L4), the agent helps backtrack to the right layer or even revise feature definitions if needed — without forcing a full restart.
+
+Output: `design/` directory with HTML and markdown artifacts that `harness-run` uses as visual specification.
+
+### 3. Run — Fully autonomous development
 
 The agent reads the plan and executes. For each feature:
 
 - Picks the next eligible feature (respects dependencies, WIP=1)
 - Writes tests first (TDD, always)
 - Implements until tests pass
+- For UI features: matches `design/` artifacts as binding visual spec
 - Runs verification layers (lint → unit → integration)
 - Commits atomically
 - Updates progress and moves to the next
 
 It keeps going until a stage is done, then optionally pauses for your review. If the context gets long, it hands off cleanly and picks up in the next session.
 
-### 3. Next — Plan the next version
+### 4. Next — Plan the next version
 
 When all stages are complete, run `/harness-next`. The agent reviews what was built, then guides another deep conversation to define the next iteration. Old files get archived, new features get planned, and `/harness-run` picks up the new work.
 
@@ -54,6 +69,7 @@ When all stages are complete, run `/harness-next`. The agent reviews what was bu
 | Command | What it does |
 |---------|-------------|
 | `/harness-init` | Deep conversation → project skeleton files |
+| `/harness-design` | Layered visual design (UI projects) |
 | `/harness-run` | Autonomous development loop (TDD, verify, commit) |
 | `/harness-next` | Plan next version based on completed work |
 | `/harness-config` | View/modify runtime settings |
@@ -88,10 +104,10 @@ Skills are copied to your platform's skill directory. Re-run to update.
 
 ```bash
 # Global
-rm -rf ~/.claude/skills/harness-init ~/.claude/skills/harness-run ~/.claude/skills/harness-next ~/.claude/skills/harness-config
+rm -rf ~/.claude/skills/harness-init ~/.claude/skills/harness-design ~/.claude/skills/harness-run ~/.claude/skills/harness-next ~/.claude/skills/harness-config
 
 # Local
-rm -rf .claude/skills/harness-init .claude/skills/harness-run .claude/skills/harness-next .claude/skills/harness-config
+rm -rf .claude/skills/harness-init .claude/skills/harness-design .claude/skills/harness-run .claude/skills/harness-next .claude/skills/harness-config
 ```
 
 ---
@@ -109,6 +125,16 @@ When you run `/harness-init`, these files are generated in your project root:
 | `DECISIONS.md` | Technical decisions with rationale |
 | `AGENTS.md` | Project entry point (constraints, tech stack, commands) |
 | `Makefile` | Standard commands (setup, dev, check) |
+
+When you run `/harness-design` (UI projects), these are added under `design/`:
+
+| File | Purpose |
+|------|---------|
+| `design/wireframes.html` | L1 — page structure tiles (grayscale) |
+| `design/flow.md` | L2 — navigation flow (mermaid) |
+| `design/styleguide.html` | L3 — color, typography, components |
+| `design/preview-{page}.html` | L4 — static mockup of each key page |
+| `design/motion.html` | L5 — animation demo cards |
 
 ---
 
