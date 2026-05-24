@@ -391,7 +391,12 @@ After generating all files:
 1. Create `docs/architecture/.gitkeep` to ensure the directory is tracked.
 2. Stage all generated files: `git add` each file by name.
 3. Commit with message: `feat: harness init — project skeleton generated`
-4. Tell the user initialization is complete and they can run `/harness-run` to start development.
+4. **Design prompt (UI projects only):** Check the project type. If it is Web, Desktop, or Mobile:
+   - Ask the user:
+     > "This is a project with a visual interface. To make sure the UI matches your vision, I recommend going through a layered visual design process before starting development. Want to enter `/harness-design` now?"
+   - If user confirms → invoke `/harness-design` (proceed directly into the design flow)
+   - If user declines → tell them: "No problem. You can run `/harness-design` anytime later. For now, run `/harness-run` to start development."
+5. If project type is CLI or Library (no UI), simply tell the user: "Initialization complete. Run `/harness-run` to start development."
 
 ---
 
